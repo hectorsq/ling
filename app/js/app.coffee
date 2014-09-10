@@ -1,5 +1,6 @@
 angular.module('ling', [
-  'ui.router',
+  'ui.router'
+  'ui.bootstrap'
   'restangular'
 ])
 
