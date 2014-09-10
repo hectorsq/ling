@@ -11,6 +11,7 @@ module.exports = function(lineman) {
 
    js: {
      vendor: [
+       "vendor/js/angular.js",
        "vendor/js/lodash.js"
      ]
    }
