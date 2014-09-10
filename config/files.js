@@ -13,7 +13,8 @@ module.exports = function(lineman) {
       vendor: [
         "vendor/js/angular.js",
         "vendor/js/lodash.js",
-        "vendor/js/angular-ui-router.js"
+        "vendor/js/angular-ui-router.js",
+        "vendor/js/restangular.js"
       ]
     }
 
