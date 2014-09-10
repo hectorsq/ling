@@ -7,8 +7,8 @@ angular.module('ling')
 
   .state "home",
     url: "/home"
-    template: "<p>Home</p>"
+    templateUrl: "home.html"
 
   .state "about",
     url: "/about"
-    template: "<p>About</p>"
+    templateUrl: "about.html"
