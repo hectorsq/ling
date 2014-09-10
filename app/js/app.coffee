@@ -2,6 +2,7 @@ angular.module('ling', [
   'ui.router'
   'ui.bootstrap'
   'restangular'
+  'Devise'
 ])
 
 .config( (RestangularProvider) ->
