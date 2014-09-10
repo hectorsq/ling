@@ -9,12 +9,12 @@ module.exports = function(lineman) {
   //Override file patterns here
   return {
 
-   js: {
-     vendor: [
-       "vendor/js/angular.js",
-       "vendor/js/lodash.js"
-     ]
-   }
+    js: {
+      vendor: [
+        "vendor/js/angular.js",
+        "vendor/js/lodash.js"
+      ]
+    }
 
   };
 };
