@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ling" ng-controller="LingController">
   <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title><%= pkg.name %></title>
 
     <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
   </head>
   <body>
+    <p>{{ testMessage }}</p>
     <script type="text/javascript" src="<%= js %>"></script>
   </body>
 </html>

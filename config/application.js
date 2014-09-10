@@ -15,6 +15,12 @@ module.exports = function(lineman) {
   //Override application configuration here. Common examples follow in the comments.
   return {
 
+    ngtemplates: {
+      options: {
+        module: "ling"
+      }
+    }
+
     // API Proxying
     //
     // During development, you'll likely want to make XHR (AJAX) requests to an API on the same
