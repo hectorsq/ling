@@ -19,6 +19,20 @@ module.exports = function(lineman) {
       options: {
         module: "ling"
       }
+    },
+
+    // If you are using Coffeescript to define the angular.module for your app,
+    // you will need to swap the concat order in config/application.js such that
+    // coffeescript files are included before javascript.
+    concat_sourcemap: {
+      js: {
+        src: [
+          "<%= files.js.vendor %>",
+          "<%= files.coffee.generated %>",
+          "<%= files.js.app %>",
+          "<%= files.ngtemplates.dest %>"
+        ]
+      }
     }
 
     // API Proxying
