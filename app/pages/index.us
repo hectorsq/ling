@@ -38,6 +38,12 @@
                 About...
               </a>
             </li>
+            <li>
+              <a href ng-click="logout()">
+                <i class="fa fa-frown-o"></i>
+                Log out
+              </a>
+            </li>
           </ul>
         </div>
       </div>

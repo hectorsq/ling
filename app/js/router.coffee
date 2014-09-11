@@ -12,3 +12,7 @@ angular.module('ling')
   .state 'about',
     url: '/about'
     templateUrl: 'about.html'
+
+  .state 'login',
+    url: '/login'
+    templateUrl: 'login.html'
