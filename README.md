@@ -17,25 +17,25 @@ I strongly recommend to read lineman's site in order to understand it better.
 
 ## Installation
 
-1. Install [node](http://nodejs.org/).
-1. Install lineman globally
+* Install [node](http://nodejs.org/).
+* Install lineman globally
 ```bash
 $ sudo npm install -g lineman
 ```
-1. Clone this repository.
+* Clone this repository.
 ```bash
 $ git clone git@github.com:hectorsq/ling.git my-app
 ```
-1. Install node dependencies
+* Install node dependencies
 ```bash
 $ cd myapp
 $ npm install
 ```
-1. Run lineman
+* Run lineman
 ```bash
 $ lineman run
 ```
-1. Open your browser at localhost:8000
+* Open your browser at localhost:8000
 
 ## Acknowledgements
 
