@@ -48,7 +48,7 @@ module.exports = function(lineman) {
         host: 'localhost',
         port: 3000
       }
-    }
+    },
 
     // Sass
     //
@@ -73,7 +73,7 @@ module.exports = function(lineman) {
     // make a change in each browser you're working against. To enable LiveReload,
     // comment out the following line:
     //
-    // livereload: true
+    livereload: true
 
   };
 };
