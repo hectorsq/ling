@@ -11,40 +11,51 @@
   </head>
   <body>
     <div class="container">
-      <div class="navbar navbar-default">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
-            ng-click="menuCollapsed = ! menuCollapsed">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="navbar-brand">
-            ling
+      <div ng-hide="menu.show">
+        <div class="navbar navbar-default">
+          <div class="navbar-header">
+            <div class="navbar-brand">
+              ling
+            </div>
           </div>
         </div>
-        <div class="collapse navbar-collapse" collapse="menuCollapsed">
-          <ul class="nav navbar-nav">
-            <li ui-sref-active="active">
-              <a href ui-sref="home">
-                <i class="fa fa-home"></i>
-                Home
-              </a>
-            </li>
-            <li ui-sref-active="active">
-              <a href ui-sref="about">
-                <i class="fa fa-info-circle"></i>
-                About...
-              </a>
-            </li>
-            <li>
-              <a href ng-click="logout()">
-                <i class="fa fa-frown-o"></i>
-                Log out
-              </a>
-            </li>
-          </ul>
+      </div>
+      <div ng-show="menu.show">
+        <div class="navbar navbar-default">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
+              ng-click="menuCollapsed = ! menuCollapsed">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+              ling
+            </div>
+          </div>
+          <div class="collapse navbar-collapse" collapse="menuCollapsed">
+            <ul class="nav navbar-nav">
+              <li ui-sref-active="active">
+                <a href ui-sref="home">
+                  <i class="fa fa-home"></i>
+                  Home
+                </a>
+              </li>
+              <li ui-sref-active="active">
+                <a href ui-sref="about">
+                  <i class="fa fa-info-circle"></i>
+                  About...
+                </a>
+              </li>
+              <li>
+                <a href ng-click="logout()">
+                  <i class="fa fa-frown-o"></i>
+                  Log out
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

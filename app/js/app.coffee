@@ -10,10 +10,21 @@ angular.module('ling', [
   RestangularProvider.setRequestSuffix('.json')
 )
 
-.run( ($rootScope) ->
+.run( ($rootScope, Auth) ->
   $rootScope.user =
     email: ''
     password: ''
+
+  $rootScope.menu =
+    show: false
+
+  Auth.currentUser().then(
+    (user) ->
+      $rootScope.menu.show = true
+    ,
+    (error) ->
+      $rootScope.menu.show = false
+  )
 )
 
 .controller 'LingController', ($scope, $state, Auth) ->
@@ -21,12 +32,14 @@ angular.module('ling', [
   $scope.login = (user) ->
     Auth.login(user).then(
       (newUser) ->
+        $scope.menu.show = true
         $state.go 'about'
     )
 
   $scope.logout = ->
     Auth.logout().then(
       (oldUser) ->
+        $scope.menu.show = false
         $scope.user.email = ''
         $scope.user.password = ''
         $state.go 'login'
