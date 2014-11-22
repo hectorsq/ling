@@ -14,7 +14,7 @@ module.exports = function(lineman) {
         "vendor/js/angular-1.3.3.js",
         "vendor/js/lodash.js",
         "vendor/js/angular-ui-router-0.2.13.js",
-        "vendor/js/ui-bootstrap-tpls-0.11.0.js",
+        "vendor/js/ui-bootstrap-tpls-0.12.0.js",
         "vendor/js/devise-0.5.0.js"
       ]
     }
