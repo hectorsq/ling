@@ -4,6 +4,10 @@ angular.module('ling', [
   'Devise'
 ])
 
+.config( (AuthProvider) ->
+  AuthProvider.interceptAuth true
+)
+
 .run( ($rootScope, Auth) ->
   $rootScope.user =
     email: ''
