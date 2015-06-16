@@ -2,20 +2,38 @@
     'use strict';
     var devise = angular.module('Devise', []);
 
-    devise.factory('deviseInterceptor401', ['$rootScope', '$q', function($rootScope, $q) {
-    // Only for intercepting 401 requests.
-    return {
-        responseError: function(response) {
-            if (response.status === 401 && response.config.interceptAuth) {
-                var deferred = $q.defer();
-                $rootScope.$broadcast('devise:unauthorized', response, deferred);
-                return deferred.promise;
-            }
-            return $q.reject(response);
-        }
+    devise.provider('AuthIntercept', function AuthInterceptProvider() {
+    /**
+     * Set to true to intercept 401 Unauthorized responses
+     */
+    var interceptAuth = false;
+
+    // The interceptAuth config function
+    this.interceptAuth = function(value) {
+        interceptAuth = !!value || value === void 0;
+        return this;
     };
-}]).config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('deviseInterceptor401');
+
+    this.$get = ['$rootScope', '$q', function($rootScope, $q) {
+        // Only for intercepting 401 requests.
+        return {
+            responseError: function(response) {
+                // Determine if the response is specifically disabling the interceptor.
+                var intercept = response.config.interceptAuth;
+                intercept = !!intercept || (interceptAuth && intercept === void 0);
+
+                if (intercept && response.status === 401) {
+                    var deferred = $q.defer();
+                    $rootScope.$broadcast('devise:unauthorized', response, deferred);
+                    return deferred.promise;
+                }
+
+                return $q.reject(response);
+            }
+        };
+    }];
+}).config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('AuthIntercept');
 }]);
 
     devise.provider('Auth', function AuthProvider() {
@@ -36,11 +54,6 @@
         logout: 'DELETE',
         register: 'POST'
     };
-
-    /**
-     * Set to true if 401 interception of the provider is not desired
-     */
-    var interceptAuth = false;
 
     /**
      * Default devise resource_name is 'user', can be set to any string.
@@ -68,11 +81,10 @@
 
     // A helper function that will setup the ajax config
     // and merge the data key if provided
-    function httpConfig(action, data) {
+    function httpConfig(action, data, additionalConfig) {
         var config = {
             method: methods[action].toLowerCase(),
-            url: paths[action],
-            interceptAuth: interceptAuth
+            url: paths[action]
         };
 
         if (data) {
@@ -84,6 +96,7 @@
             }
         }
 
+        angular.extend(config, additionalConfig);
         return config;
     }
 
@@ -103,15 +116,6 @@
     }
     configure.call(this, methods, 'Method');
     configure.call(this, paths, 'Path');
-
-    // The interceptAuth config function
-    this.interceptAuth = function(value) {
-        if (value === undefined) {
-            return interceptAuth;
-        }
-        interceptAuth = !!value;
-        return this;
-    };
 
     // The resourceName config function
     this.resourceName = function(value) {
@@ -189,15 +193,18 @@
              *  });
              *
              * @param {Object} [creds] A hash of user credentials.
+             * @param {Object} [config] Optional, additional config which
+             *                  will be added to http config for underlying
+             *                  $http.
              * @returns {Promise} A $http promise that will be resolved or
              *                  rejected by the server.
              */
-            login: function(creds) {
+            login: function(creds, config) {
                 var withCredentials = arguments.length > 0,
                     loggedIn = service.isAuthenticated();
 
                 creds = creds || {};
-                return $http(httpConfig('login', creds))
+                return $http(httpConfig('login', creds, config))
                     .then(service.parse)
                     .then(save)
                     .then(function(user) {
@@ -221,12 +228,15 @@
              *      AuthProvider.logoutPath('path/on/server.json');
              *      AuthProvider.logoutMethod('GET');
              *  });
+             * @param {Object} [config] Optional, additional config which
+             *                  will be added to http config for underlying
+             *                  $http.
              * @returns {Promise} A $http promise that will be resolved or
              *                  rejected by the server.
              */
-            logout: function() {
+            logout: function(config) {
                 var returnOldUser = constant(service._currentUser);
-                return $http(httpConfig('logout'))
+                return $http(httpConfig('logout', undefined, config))
                     .then(reset)
                     .then(returnOldUser)
                     .then(broadcast('logout'));
@@ -248,12 +258,15 @@
              *  });
              *
              * @param {Object} [creds] A hash of user credentials.
+             * @param {Object} [config] Optional, additional config which
+             *                  will be added to http config for underlying
+             *                  $http.
              * @returns {Promise} A $http promise that will be resolved or
              *                  rejected by the server.
              */
-            register: function(creds) {
+            register: function(creds, config) {
                 creds = creds || {};
-                return $http(httpConfig('register', creds))
+                return $http(httpConfig('register', creds, config))
                     .then(service.parse)
                     .then(save)
                     .then(broadcast('new-registration'));

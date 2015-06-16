@@ -4,8 +4,8 @@ angular.module('ling', [
   'Devise'
 ])
 
-.config( (AuthProvider) ->
-  AuthProvider.interceptAuth true
+.config( (AuthInterceptProvider) ->
+  AuthInterceptProvider.interceptAuth true
 )
 
 .run( ($rootScope, Auth) ->
