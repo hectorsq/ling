@@ -12,7 +12,6 @@ I strongly recommend to read lineman's site in order to understand it better.
 * [Font awesome icons](http://fortawesome.github.io/Font-Awesome/).
 * [UI Router](https://github.com/angular-ui/ui-router)
 * [UI Bootstrap](http://angular-ui.github.io/bootstrap/)
-* [Restangular](https://github.com/mgonto/restangular)
 * [AngularDevise](https://github.com/cloudspace/angular_devise)
 
 ## Installation
@@ -36,6 +35,7 @@ $ npm install
 $ lineman run
 ```
 * Open your browser at localhost:8000
+* if you have a Rails backend using devise visit localhost:8000/#/login
 
 ## Acknowledgements
 
