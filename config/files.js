@@ -13,7 +13,7 @@ module.exports = function(lineman) {
       vendor: [
         "vendor/js/angular-1.3.16.js",
         "vendor/js/lodash.js",
-        "vendor/js/angular-ui-router-0.2.13.js",
+        "vendor/js/angular-ui-router-0.2.15.js",
         "vendor/js/ui-bootstrap-tpls-0.12.0.js",
         "vendor/js/devise-1.0.0.js"
       ]
